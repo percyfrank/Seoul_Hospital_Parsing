@@ -29,8 +29,7 @@ class HostpitalParserTest {
         // 병원 이름
         Assertions.assertEquals("가산기대찬의원",hospital.getName());
         // 병원 세부 카테고리
-
-
+        Assertions.assertEquals(null,hospital.getSubdivision());
 
     }
 
