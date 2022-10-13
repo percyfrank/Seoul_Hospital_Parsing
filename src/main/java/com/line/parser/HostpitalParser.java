@@ -9,9 +9,9 @@ public class HostpitalParser implements Parser<Hospital> {
         str = str.replaceAll("\"", "");
         String[] splitted = str.split(",");
 
-        String[] splitted_address = splitted[1].split(" ");
-        String district = splitted_address[0] + " " + splitted_address[1];
+//        String[] splitted_address = splitted[1].split(" ");
+//        String district = splitted_address[0] + " " + splitted_address[1];
 
-        return new Hospital(splitted[0],splitted[1],district,splitted[2],splitted[6],splitted[10]);
+        return new Hospital(splitted[0],splitted[1],splitted[2],splitted[6],splitted[10]);
     }
 }

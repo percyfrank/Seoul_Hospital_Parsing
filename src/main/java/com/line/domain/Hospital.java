@@ -10,13 +10,18 @@ public class Hospital {
     private String name;
     private String subdivision;
 
-    public Hospital(String id, String address, String district, String category, String emergencyRoom, String name) {
+    public Hospital(String id, String address,String category, String emergencyRoom, String name) {
         this.id = id;
         this.address = address;
-        this.district = district;
         this.category = category;
         this.emergencyRoom = emergencyRoom;
         this.name = name;
+        this.setDistrict();
+    }
+
+    public void setDistrict() {
+        String[] splitted = address.split(" ");
+        this.district = String.format("%s %s",splitted[0],splitted[1]);
     }
 
     public String getId() {
