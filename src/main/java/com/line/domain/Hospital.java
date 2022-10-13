@@ -23,9 +23,8 @@ public class Hospital {
     public String toSqlQuery() {
 
         String sql = "";
-        sql = "INSERT INTO `seoul_hospital_location`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
-                + "VALUES(" + this.id + "," + this.address + "," + this.district + "\","
-                + this.category + "," + this.emergencyRoom + "," + this.name + ",\"" + this.subdivision + "\");\n";
+        sql = "(" + this.id + "," + this.address + "," + this.district + "\","
+                + this.category + "," + this.emergencyRoom + "," + this.name + ",\"" + this.subdivision + "\"),\n";
 
         return sql;
     }

@@ -29,6 +29,8 @@ public class Main {
         File file = new File(sql_file);
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        bw.write("INSERT INTO `seoul_hospital_location`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
+                + "VALUES\n");
         for(String query : querys) {
             bw.write(query);
         }
