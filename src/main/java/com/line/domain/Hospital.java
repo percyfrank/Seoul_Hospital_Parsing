@@ -10,20 +10,31 @@ public class Hospital {
     private String name;
     private String subdivision;
 
-    public Hospital(String id, String address,String category, String emergencyRoom, String name) {
+    public Hospital(String id, String address,String category, String emergencyRoom, String name,String subdivision) {
         this.id = id;
         this.address = address;
         this.category = category;
         this.emergencyRoom = emergencyRoom;
         this.name = name;
-        this.setSubdivision();
+        this.subdivision = subdivision;
         this.setDistrict();
     }
 
+    public String toSqlQuery() {
+
+        String sql = "";
+        sql = "INSERT INTO `seoul_hospital_location`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
+                + "VALUES(" + this.id + "," + this.address + "," + this.district + "\","
+                + this.category + "," + this.emergencyRoom + "," + this.name + ",\"" + this.subdivision + "\");\n";
+
+        return sql;
+    }
     public void setDistrict() {
         String[] splitted = address.split(" ");
         this.district = String.format("%s %s",splitted[0],splitted[1]);
     }
+
+
     public void setSubdivision() {
         String[] subdivison = {"내과", "외과", "소아", "피부", "성형", "정형외과", "척추", "교정", "산부인과",
                 "관절", "봉합", "화상", "골절", "영유아", "안과", "가정의학과", "비뇨기과", "치과"};
