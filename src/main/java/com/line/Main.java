@@ -38,10 +38,10 @@ public class Main {
 
 
 //        for (Hospital hospital : hospitals) {
-//            System.out.printf("%s %s %s %s %s %s %s",hospital.getId(),hospital.getAddress(),hospital.getDistrict()
+//            System.out.printf("%s, %s, %s, %s, %s, %s, %s",hospital.getId(),hospital.getAddress(),hospital.getDistrict()
 //            ,hospital.getCategory(),hospital.getEmergencyRoom(),hospital.getName(),hospital.getSubdivision());
 //        }
-
+//
 //        System.out.println(hospitals.size());
 //        for(Hospital h : hospitals) {
 //            System.out.println(h.getId());

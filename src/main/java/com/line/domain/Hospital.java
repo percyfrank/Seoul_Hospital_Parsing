@@ -23,14 +23,14 @@ public class Hospital {
     public String toSqlQuery() {
 
         String sql = "";
-        sql = "(" + this.id + "," + this.address + "," + this.district + "\","
+        sql = "(" + this.id + "," + this.address + "," + this.district + ","
                 + this.category + "," + this.emergencyRoom + "," + this.name + ",\"" + this.subdivision + "\"),\n";
 
         return sql;
     }
     public void setDistrict() {
         String[] splitted = address.split(" ");
-        this.district = String.format("%s %s",splitted[0],splitted[1]);
+        this.district = String.format("%s %s\"",splitted[0],splitted[1]);
     }
 
 
