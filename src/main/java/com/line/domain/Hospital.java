@@ -20,6 +20,7 @@ public class Hospital {
         this.setDistrict();
     }
 
+    // SQL 쿼리문으로 변경
     public String toSqlQuery() {
 
         String sql = "";
@@ -28,24 +29,25 @@ public class Hospital {
 
         return sql;
     }
+
+    // '구'까지의 정보는 address에서 파싱
     public void setDistrict() {
         String[] splitted = address.split(" ");
         this.district = String.format("%s %s\"",splitted[0],splitted[1]);
     }
 
-
-    public void setSubdivision() {
-        String[] subdivison = {"내과", "외과", "소아", "피부", "성형", "정형외과", "척추", "교정", "산부인과",
-                "관절", "봉합", "화상", "골절", "영유아", "안과", "가정의학과", "비뇨기과", "치과"};
-
-        for(String division : subdivison) {
-            if(name.contains(division)) {
-                this.subdivision = division;
-            } else {
-                this.subdivision = null;
-            }
-        }
-    }
+//    public void setSubdivision() {
+//        String[] subdivison = {"내과", "외과", "소아", "피부", "성형", "정형외과", "척추", "교정", "산부인과",
+//                "관절", "봉합", "화상", "골절", "영유아", "안과", "가정의학과", "비뇨기과", "치과"};
+//
+//        for(String division : subdivison) {
+//            if(name.contains(division)) {
+//                this.subdivision = division;
+//            } else {
+//                this.subdivision = null;
+//            }
+//        }
+//    }
 
     public String getId() {
         return id;
