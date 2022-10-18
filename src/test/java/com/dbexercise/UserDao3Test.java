@@ -9,14 +9,12 @@ class UserDao3Test {
     @Test
     void addAndSelect() {
 
-//        UserDao3 userDao = new UserDao3();
-        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
-        User user = new User("9", "EternityHwan", "1123");
+        UserDao3 userDao = new UserDao3();
+//        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
+        User user = new User("14", "EternityHwan", "1123");
         userDao.add(user);
 
-        User selectedUser = userDao.getById("9");
+        User selectedUser = userDao.getById("14");
         Assertions.assertEquals("EternityHwan",selectedUser.getName());
     }
-
-
 }

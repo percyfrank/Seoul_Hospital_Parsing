@@ -7,21 +7,23 @@ import java.util.Map;
 
 public class UserDao3 {
 
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Map<String, String> getenv = System.getenv();
-        String dbHost = getenv.get("DB_HOST");
-        String dbUser = getenv.get("DB_USER");
-        String dbPassword = getenv.get("DB_PASSWORD");
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
-        return conn;
-    }
+    private AWSConnectionMaker awsConnectionMaker;
+//    private Connection getConnection() throws SQLException, ClassNotFoundException {
+//        Map<String, String> getenv = System.getenv();
+//        String dbHost = getenv.get("DB_HOST");
+//        String dbUser = getenv.get("DB_USER");
+//        String dbPassword = getenv.get("DB_PASSWORD");
+//
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+//        return conn;
+//    }
 
     public void add(User user) {
 
         try {
-            Connection conn = getConnection();
+            awsConnectionMaker = new AWSConnectionMaker();
+            Connection conn = awsConnectionMaker.getConnection();
             PreparedStatement ps = conn.prepareStatement("insert into users(id,name,password) values (?,?,?)");
 
             ps.setString(1, user.getId());
@@ -32,7 +34,7 @@ public class UserDao3 {
             ps.close();
             conn.close();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -41,7 +43,8 @@ public class UserDao3 {
     public User getById(String id) {
 
         try {
-            Connection conn = getConnection();
+            awsConnectionMaker = new AWSConnectionMaker();
+            Connection conn = awsConnectionMaker.getConnection();
             PreparedStatement ps = conn.prepareStatement("select * from users where id = ?");
 
             ps.setString(1,id);
@@ -54,7 +57,7 @@ public class UserDao3 {
             conn.close();
             return user;
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
