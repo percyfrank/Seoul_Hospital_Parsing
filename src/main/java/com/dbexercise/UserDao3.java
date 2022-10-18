@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class UserDao3 {
 
-    private AWSConnectionMaker awsConnectionMaker;
+    private ConnectionMaker awsConnectionMaker;
 
     public UserDao3() {
         this.awsConnectionMaker = awsConnectionMaker;
