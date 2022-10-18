@@ -2,21 +2,14 @@ package com.dbexercise;
 
 import com.dbexercise.domain.User;
 
-import java.sql.*;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class UserDao3 {
+public abstract class UserDaoAbstract {
 
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Map<String, String> getenv = System.getenv();
-        String dbHost = getenv.get("DB_HOST");
-        String dbUser = getenv.get("DB_USER");
-        String dbPassword = getenv.get("DB_PASSWORD");
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
-        return conn;
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
     public void add(User user) {
 
