@@ -18,16 +18,16 @@ public class UserDao3 {
         return conn;
     }
 
-    public void add() throws ClassNotFoundException, SQLException {
+    public void add(User user) throws ClassNotFoundException, SQLException {
 
 
         try {
             Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement("insert into users(id,name,password) values (?,?,?)");
 
-            ps.setString(1, "1");
-            ps.setString(2, "Kyeongrok");
-            ps.setString(3, "100203");
+            ps.setString(1, user.getId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getPassword());
 
             ps.executeUpdate();
             ps.close();
@@ -63,7 +63,7 @@ public class UserDao3 {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         UserDao3 userDao3 = new UserDao3();
-        userDao3.add();
+        userDao3.add(new User("7","RURU","1234QWER"));
         System.out.println(userDao3.getById("1"));
 
     }
