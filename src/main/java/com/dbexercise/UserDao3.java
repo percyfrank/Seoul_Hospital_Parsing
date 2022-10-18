@@ -15,6 +15,7 @@ public class UserDao3 {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        return conn;
     }
 
     public void add() throws ClassNotFoundException, SQLException {
