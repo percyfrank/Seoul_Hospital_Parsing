@@ -8,7 +8,12 @@ import java.util.Map;
 public class UserDao3 {
 
     private AWSConnectionMaker awsConnectionMaker;
-//    private Connection getConnection() throws SQLException, ClassNotFoundException {
+
+    public UserDao3() {
+        this.awsConnectionMaker = awsConnectionMaker;
+    }
+
+    //    private Connection getConnection() throws SQLException, ClassNotFoundException {
 //        Map<String, String> getenv = System.getenv();
 //        String dbHost = getenv.get("DB_HOST");
 //        String dbUser = getenv.get("DB_USER");
