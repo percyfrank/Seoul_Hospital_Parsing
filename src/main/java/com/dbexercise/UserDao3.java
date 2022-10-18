@@ -7,15 +7,21 @@ import java.util.Map;
 
 public class UserDao3 {
 
-    public void add() throws ClassNotFoundException, SQLException {
+    private Connection getConnection() throws SQLException, ClassNotFoundException {
         Map<String, String> getenv = System.getenv();
         String dbHost = getenv.get("DB_HOST");
         String dbUser = getenv.get("DB_USER");
         String dbPassword = getenv.get("DB_PASSWORD");
 
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+    }
+
+    public void add() throws ClassNotFoundException, SQLException {
+
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+            Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement("insert into users(id,name,password) values (?,?,?)");
 
             ps.setString(1, "1");
@@ -33,14 +39,9 @@ public class UserDao3 {
     }
 
     public User getById(String id) {
-        Map<String, String> getenv = System.getenv();
-        String dbHost = getenv.get("DB_HOST");
-        String dbUser = getenv.get("DB_USER");
-        String dbPassword = getenv.get("DB_PASSWORD");
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+            Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement("select * from users where id = ?");
 
             ps.setString(1,id);
