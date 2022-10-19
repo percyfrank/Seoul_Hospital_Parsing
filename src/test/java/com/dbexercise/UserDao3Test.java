@@ -11,8 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = UserDaoFactory.class)
+@ExtendWith(SpringExtension.class) //Test
+@ContextConfiguration(classes = UserDaoFactory.class) // 설정 정보
 class UserDao3Test {
 
     @Autowired
@@ -21,7 +21,7 @@ class UserDao3Test {
     void addAndSelect() {
 
 //        UserDao3 userDao = new UserDao3(new AWSConnectionMaker());
-//        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
+//        AWSUserDaoImpl userDao = new AWSUserDaoImpl();1541
 //        UserDao3 userDao = new UserDaoFactory().awsUserDao();
         UserDao3 userDao = context.getBean("awsUserDao", UserDao3.class);
         User user = new User("16", "EternityHwan", "1123");
