@@ -9,12 +9,13 @@ class UserDao3Test {
     @Test
     void addAndSelect() {
 
-        UserDao3 userDao = new UserDao3();
+//        UserDao3 userDao = new UserDao3(new AWSConnectionMaker());
 //        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
-        User user = new User("14", "EternityHwan", "1123");
+        UserDao3 userDao = new UserDaoFactory().awsUserDao();
+        User user = new User("15", "EternityHwan", "1123");
         userDao.add(user);
 
-        User selectedUser = userDao.getById("14");
+        User selectedUser = userDao.getById("15");
         Assertions.assertEquals("EternityHwan",selectedUser.getName());
     }
 }
