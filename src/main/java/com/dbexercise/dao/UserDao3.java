@@ -1,9 +1,8 @@
-package com.dbexercise;
+package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
 
 import java.sql.*;
-import java.util.Map;
 
 public class UserDao3 {
 
