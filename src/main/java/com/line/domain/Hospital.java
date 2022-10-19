@@ -77,11 +77,4 @@ public class Hospital {
         return subdivision;
     }
 
-    //        public List<Hospital> readAndParse(String filename) {
-//        ArrayList<Hospital> result = new ArrayList<>();
-//
-//        return result;
-//    }
-
-
 }
