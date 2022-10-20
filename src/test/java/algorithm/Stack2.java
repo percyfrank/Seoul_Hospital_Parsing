@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.EmptyStackException;
+
 public class Stack2 {
 
     private Integer[] arr;
@@ -17,13 +19,18 @@ public class Stack2 {
     }
 
     public void push(int value) {
-        this.arr[top] = value;
-        this.top++;
+        this.arr[this.top++] = value;
     }
 
     public int pop() {
-        int value = this.arr[this.top-1];
-        this.top--;
-        return value;
+        if(isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.arr[--this.top];
+    }
+
+    public boolean isEmpty() {
+//        boolean isEmpty = this.top == 0;
+        return this.top == 0;
     }
 }
