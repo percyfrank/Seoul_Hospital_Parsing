@@ -1,6 +1,7 @@
 package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 import java.util.Map;
@@ -56,12 +57,19 @@ public class UserDao3 {
 
             ps.setString(1,id);
             ResultSet resultSet = ps.executeQuery();
-            resultSet.next();
-            User user = new User(resultSet.getString("id"), resultSet.getString("name"), resultSet.getString("password"));
+
+            User user = null;
+            if(resultSet.next()) {
+                user = new User(resultSet.getString("id"),
+                        resultSet.getString("name"), resultSet.getString("password"));
+            }
 
             resultSet.close();
             ps.close();
             conn.close();
+
+            if(user == null) throw new EmptyResultDataAccessException(1);
+
             return user;
 
         } catch (SQLException e) {
