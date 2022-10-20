@@ -68,5 +68,19 @@ class Stack2Test {
         //then
     }
 
+    @Test
+    public void peek() throws Exception {
+        //given
+        Stack2 stack = new Stack2();
+        assertThrows(EmptyStackException.class, ()->{
+            stack.peek();
+        });
+        //when
+        stack.push(10);
+        int peeked = stack.peek();
+        //then
+        assertEquals(10,peeked);
+    }
+
 
 }
