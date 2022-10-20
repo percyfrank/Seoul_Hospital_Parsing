@@ -78,14 +78,28 @@ public class UserDao3 {
     }
 
     public void deleteAll()  {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
         try {
-            Connection conn = connectionMaker.getConnection();
-            PreparedStatement ps = conn.prepareStatement("delete from users");
+            conn = connectionMaker.getConnection();
+            ps = conn.prepareStatement("delete from users");
             ps.executeUpdate();
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if(conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
         }
 
     }
