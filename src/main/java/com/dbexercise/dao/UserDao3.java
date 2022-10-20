@@ -3,6 +3,7 @@ package com.dbexercise.dao;
 import com.dbexercise.domain.User;
 
 import java.sql.*;
+import java.util.Map;
 
 public class UserDao3 {
 
@@ -28,10 +29,10 @@ public class UserDao3 {
 //    }
 
     public void add(User user) {
-
+        Map<String, String> env = System.getenv();
         try {
             Connection conn = connectionMaker.getConnection();
-            PreparedStatement ps = conn.prepareStatement("insert into users(id,name,password) values (?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("insert into users(id, name, password) values (?,?,?)");
 
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
@@ -62,6 +63,38 @@ public class UserDao3 {
             ps.close();
             conn.close();
             return user;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteAll()  {
+        try {
+            Connection conn = connectionMaker.getConnection();
+            PreparedStatement ps = conn.prepareStatement("delete from users");
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public int getCount() {
+        try {
+            Connection conn = connectionMaker.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select count(*) from users");
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            int count = rs.getInt(1);
+            rs.close();
+            ps.close();
+            conn.close();
+
+            return count;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
