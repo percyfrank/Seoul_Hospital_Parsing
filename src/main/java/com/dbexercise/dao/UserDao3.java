@@ -1,6 +1,7 @@
 package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
+import com.dbexercise2.dao.StatementStrategy;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
@@ -33,11 +34,11 @@ public class UserDao3 {
         Map<String, String> env = System.getenv();
         try {
             Connection conn = connectionMaker.getConnection();
-            PreparedStatement ps = conn.prepareStatement("insert into users(id, name, password) values (?,?,?)");
+            PreparedStatement ps = new AddStrategy(user).makePreparedStatement(conn);
 
-            ps.setString(1, user.getId());
-            ps.setString(2, user.getName());
-            ps.setString(3, user.getPassword());
+//            ps.setString(1, user.getId());
+//            ps.setString(2, user.getName());
+//            ps.setString(3, user.getPassword());
 
             ps.executeUpdate();
             ps.close();
