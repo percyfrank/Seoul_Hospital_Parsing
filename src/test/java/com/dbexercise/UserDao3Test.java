@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class) // Junit에서 Spring기능을 사용하기 위함(없으면 Autowired등 안먹힘)
 @ContextConfiguration(classes = UserDaoFactory.class) // 설정 정보
@@ -75,7 +76,6 @@ class UserDao3Test {
         assertEquals(2,userDao.getCount());
         userDao.add(user3);
         assertEquals(3,userDao.getCount());
-
         //then
     }
 
