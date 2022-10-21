@@ -1,7 +1,6 @@
 package com.dbexercise.dao;
 
 import com.dbexercise.domain.User;
-import com.dbexercise2.dao.StatementStrategy;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
@@ -19,6 +18,31 @@ public class UserDao3 {
         this.connectionMaker = connectionMaker;
     }
 
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = connectionMaker.getConnection();
+            ps = stmt.makePreparedStatement(conn);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if(conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
     //    private Connection getConnection() throws SQLException, ClassNotFoundException {
 //        Map<String, String> getenv = System.getenv();
 //        String dbHost = getenv.get("DB_HOST");
@@ -31,23 +55,7 @@ public class UserDao3 {
 //    }
 
     public void add(User user) {
-        Map<String, String> env = System.getenv();
-        try {
-            Connection conn = connectionMaker.getConnection();
-            PreparedStatement ps = new AddStrategy(user).makePreparedStatement(conn);
-
-//            ps.setString(1, user.getId());
-//            ps.setString(2, user.getName());
-//            ps.setString(3, user.getPassword());
-
-            ps.executeUpdate();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        jdbcContextWithStatementStrategy(new AddStrategy(user));
     }
 
     public User getById(String id) {
@@ -79,30 +87,7 @@ public class UserDao3 {
     }
 
     public void deleteAll()  {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-            conn = connectionMaker.getConnection();
-            ps = new DeleteAllStrategy().makePreparedStatement(conn);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if(ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-            if(conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
-
+        jdbcContextWithStatementStrategy(new DeleteAllStrategy());
     }
 
     public int getCount() {

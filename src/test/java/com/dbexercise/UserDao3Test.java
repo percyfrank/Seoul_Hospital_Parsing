@@ -34,17 +34,6 @@ class UserDao3Test {
         this.user3 = new User("3", "권오석2", "123456");
     }
 
-
-    @Test
-    void addAndSelect() {
-
-        User user = new User("14", "EternityHwan", "1123");
-        userDao.add(user);
-
-        User selectedUser = userDao.getById("14");
-        assertEquals("EternityHwan",selectedUser.getName());
-    }
-
     @Test
     public void addAndGet() throws Exception {
         //given
@@ -81,13 +70,10 @@ class UserDao3Test {
 
     @Test
     public void getById() throws Exception {
-        //given
+        //then
         assertThrows(EmptyResultDataAccessException.class, () -> {
             userDao.getById("30");
         });
-        //when
-
-        //then
     }
 
 }
