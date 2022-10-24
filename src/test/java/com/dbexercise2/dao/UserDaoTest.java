@@ -11,6 +11,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
+
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -27,7 +29,8 @@ class UserDaoTest {
 
     @BeforeEach
     void setUp() {
-        this.userDao = this.context.getBean("awsUserDao", UserDao.class);
+//        this.userDao = this.context.getBean("awsUserDao", UserDao.class);
+        this.userDao = this.context.getBean("localUserDao", UserDao.class);
         this.user1 = new User("1", "권오석", "1234");
         this.user2 = new User("2", "권오석1", "12345");
         this.user3 = new User("3", "권오석2", "123456");
@@ -72,14 +75,5 @@ class UserDaoTest {
 
         //then
     }
-
-
-
-
-
-
-
-
-
 
 }

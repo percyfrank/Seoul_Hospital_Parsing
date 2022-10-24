@@ -3,6 +3,7 @@ package com.dbexercise2.dao;
 import com.dbexercise2.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,21 +11,18 @@ import java.sql.SQLException;
 
 public class UserDao {
 
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    public UserDao() {
-        connectionMaker = new AWSConnectionMaker();
-    }
-
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public void jdbcContextWithStatementStrategy(StatementStrategy stmt) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-            conn = connectionMaker.makeConnection();
+//            conn = connectionMaker.makeConnection();
+            conn = dataSource.getConnection();
             ps = stmt.makePreparedStatement(conn);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -52,7 +50,7 @@ public class UserDao {
     public User findById(String id) {
 
         try {
-            Connection conn = connectionMaker.makeConnection();
+            Connection conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement("select * from users where id = ?");
 
             ps.setString(1,id);
@@ -84,7 +82,8 @@ public class UserDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = connectionMaker.makeConnection();
+//            conn = connectionMaker.makeConnection();
+            conn = dataSource.getConnection();
             ps = conn.prepareStatement("select count(*) from users");
             rs = ps.executeQuery();
             rs.next();
