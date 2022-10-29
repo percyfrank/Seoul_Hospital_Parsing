@@ -1,4 +1,4 @@
-package algorithm;
+package com.algorithm;
 
 public class Stack {
     private int[] arr = new int[10000];
