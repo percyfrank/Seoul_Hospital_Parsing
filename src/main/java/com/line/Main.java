@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         LineReader<Hospital> hospitalLineReader = new LineReader<>(new HostpitalParser());
-        String filename = "C:\\Users\\82104\\Desktop\\서울시 병의원 위치 정보1.csv";
+        String filename = "C:\\Users\\82104\\Desktop\\교안\\4주차 서울시 병의원 분석\\서울시 병의원 위치 정보1.csv";
         List<Hospital> hospitals = hospitalLineReader.readLine(filename);  // csv파일 읽기
 
 
@@ -26,7 +26,7 @@ public class Main {
             querys.add(query);                    // 데이터 추가
         }
 
-        String sql_file = "C:\\Users\\82104\\Desktop\\hospital_query.sql";
+        String sql_file = "C:\\Users\\82104\\Desktop\\교안\\4주차 서울시 병의원 분석\\hospital_query.sql";
         File file = new File(sql_file); //파일 생성
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
