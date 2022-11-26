@@ -17,6 +17,6 @@
   3. hospital_query 파일에 저장
 
 
-# 2. DB 연동 실습
+## 2. DB 연동 실습
 ### dbexercise package
 ### dbexercise2 package
